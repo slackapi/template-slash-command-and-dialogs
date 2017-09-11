@@ -2,8 +2,6 @@
 
 Use a slash command to create a helpdesk ticket in a 3rd-party system. Once it has been created, send an interactive message to the user with information about their ticket and a dropdown they can use to update the priority.
 
-![image]()
-
 ## Setup
 
 #### Create a Slack app
