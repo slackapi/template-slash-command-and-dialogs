@@ -1,15 +1,24 @@
+const users = require('./users');
 const axios = require('axios');
 
 class Ticket {
   constructor(userId, text, responseUrl) {
-    this.userId = userId;
-    this.text = text;
-    // Get this from the 3rd party helpdesk system
-    this.ticketId = 123;
+    const promise = new Promise((resolve, reject) => {
+      users.find(userId).then((result) => {
+        resolve(result.data.user.profile.email);
+      }).catch((err) => { reject(err); });
+    });
 
-    this.send(responseUrl);
+    promise.then((result) => {
+      this.userId = userId;
+      this.userEmail = result;
+      this.text = text;
+      // Get this from the 3rd party helpdesk system
+      this.ticketId = 123;
+      this.send(responseUrl);
 
-    return this;
+      return this;
+    });
   }
 
   send(responseUrl) {
@@ -17,7 +26,7 @@ class Ticket {
       text: 'Helpdesk ticket created!',
       attachments: [
         {
-          title: `Ticket ${this.ticketId}`,
+          title: `Ticket ${this.ticketId}: ${this.userEmail}`,
           // Get this from the 3rd party helpdesk system
           title_link: 'http://example.com',
           text: this.text,
