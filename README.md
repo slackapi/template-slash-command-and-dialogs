@@ -9,8 +9,10 @@ Use a slash command to create a helpdesk ticket in a 3rd-party system. Once it h
 #### Create a Slack app
 
 1. Create an app at api.slack.com/apps
-1. Navigate to the OAuth & Permissions page and add the following scope:
+1. Navigate to the OAuth & Permissions page and add the following scopes:
     * `commands`
+    * `users:read`
+    * `users:read:email`
 1. Click 'Save Changes' and install the app
 
 #### Run locally or [![Remix on Glitch](https://cdn.glitch.com/2703baf2-b643-4da7-ab91-7ee2a2d00b5b%2Fremix-button.svg)](https://glitch.com/edit/#!/remix/slack-slash-command-blueprint)
