@@ -2,7 +2,7 @@
 
 Use a slash command and a dialog to create a helpdesk ticket in a 3rd-party system. Once it has been created, send a message to the user with information about their ticket.
 
-![image](https://user-images.githubusercontent.com/700173/30929350-154b1684-a373-11e7-9d38-b1b9ae116fb3.png)
+![helpdesk-dialog](https://user-images.githubusercontent.com/700173/30929774-5fe9f0e2-a374-11e7-958e-0d8c362f89a3.gif)
 
 ## Setup
 
