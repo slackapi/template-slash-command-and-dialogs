@@ -16,7 +16,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
 app.get('/', (req, res) => {
-  res.send('<h2>The Interactive Slash Command app is running</h2> <p>Follow the' +
+  res.send('<h2>The Slash Command and Dialog app is running</h2> <p>Follow the' +
   ' instructions in the README to configure the Slack App and your environment variables.</p>');
 });
 
@@ -87,7 +87,7 @@ app.post('/commands', (req, res) => {
  * Endpoint to receive the dialog submission. Checks the verification token
  * and creates a Helpdesk ticket
  */
-app.post('/interactive-message', (req, res) => {
+app.post('/interactive-component', (req, res) => {
   const body = JSON.parse(req.body.payload);
 
   // check that the verification token matches expected value
