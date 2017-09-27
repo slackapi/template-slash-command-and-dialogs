@@ -1,8 +1,8 @@
-# Slash command (with interactive message) blueprint
+# Slash command and Dialogs blueprint
 
-Use a slash command to create a helpdesk ticket in a 3rd-party system. Once it has been created, send an interactive message to the user with information about their ticket and a dropdown they can use to update the priority.
+Use a slash command and a dialog to create a helpdesk ticket in a 3rd-party system. Once it has been created, send a message to the user with information about their ticket.
 
-![image]()
+![image](https://user-images.githubusercontent.com/700173/30929350-154b1684-a373-11e7-9d38-b1b9ae116fb3.png)
 
 ## Setup
 
@@ -13,6 +13,7 @@ Use a slash command to create a helpdesk ticket in a 3rd-party system. Once it h
     * `commands`
     * `users:read`
     * `users:read:email`
+    * `chat:write:bot`
 1. Click 'Save Changes' and install the app
 
 #### Run locally or [![Remix on Glitch](https://cdn.glitch.com/2703baf2-b643-4da7-ab91-7ee2a2d00b5b%2Fremix-button.svg)](https://glitch.com/edit/#!/remix/slack-slash-command-blueprint)

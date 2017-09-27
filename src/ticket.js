@@ -9,10 +9,9 @@ const users = require('./users');
  */
 const sendConfirmation = (ticket) => {
   axios.post('https://slack.com/api/chat.postMessage', qs.stringify({
-    token: process.env.SLACK_BOT_ACCESS_TOKEN,
+    token: process.env.SLACK_ACCESS_TOKEN,
     channel: ticket.userId,
     text: 'Helpdesk ticket created!',
-    as_user: true,
     attachments: JSON.stringify([
       {
         title: `Ticket created for ${ticket.userEmail}`,
