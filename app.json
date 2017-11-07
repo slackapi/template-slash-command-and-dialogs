@@ -1,0 +1,7 @@
+{
+  "name": "Slack Slash Command & Dialog Blueprint",
+  "description": "A sample Slack app that implements a skeleton helpdesk integration using a Slash Command and Dialog",
+  "repository": "https://github.com/slackapi/template-slash-command-and-dialogs",
+  "logo": "https://a.slack-edge.com/ae57/img/slack_api_logo.png",
+  "keywords": ["node", "express", "slack", "slash command"]
+}
