@@ -14,7 +14,7 @@ Use a slash command and a dialog to create a helpdesk ticket in a 3rd-party syst
 1. Navigate to the OAuth & Permissions page and add the following scopes:
     * `commands`
     * `users:read`
-    * `users:read:email`
+    * `users:read.email`
     * `chat:write:bot`
 1. Click 'Save Changes' and install the app
 
