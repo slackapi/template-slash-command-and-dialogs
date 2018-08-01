@@ -84,7 +84,6 @@ app.post('/commands', (req, res) => {
     axios.post(`${apiUrl}/dialog.open`, qs.stringify(dialog))
       .then((result) => {
         debug('dialog.open: %o', result.data);
-        console.log(result.data)
         res.send('');
       }).catch((err) => {
         debug('dialog.open call failed: %o', err);
