@@ -5,15 +5,27 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const qs = require('querystring');
 const ticket = require('./ticket');
+const signature = require('./verifySignature');
 const debug = require('debug')('slash-command-template:index');
+
+const apiUrl = 'https://slack.com/api';
 
 const app = express();
 
 /*
  * Parse application/x-www-form-urlencoded && application/json
+ * Use body-parser's `verify` callback to export a parsed raw body
+ * that you need to use to verify the signature
  */
-app.use(bodyParser.urlencoded({ extended: true }));
-app.use(bodyParser.json());
+
+const rawBodyBuffer = (req, res, buf, encoding) => {
+  if (buf && buf.length) {
+    req.rawBody = buf.toString(encoding || 'utf8');
+  }
+};
+
+app.use(bodyParser.urlencoded({verify: rawBodyBuffer, extended: true }));
+app.use(bodyParser.json({ verify: rawBodyBuffer }));
 
 app.get('/', (req, res) => {
   res.send('<h2>The Slash Command and Dialog app is running</h2> <p>Follow the' +
@@ -27,10 +39,10 @@ app.get('/', (req, res) => {
 app.post('/commands', (req, res) => {
   // extract the verification token, slash command text,
   // and trigger ID from payload
-  const { token, text, trigger_id } = req.body;
+  const { text, trigger_id } = req.body;
 
   // check that the verification token matches expected value
-  if (token === process.env.SLACK_VERIFICATION_TOKEN) {
+  if (signature.isVerified(req)) {
     // create the dialog payload - includes the dialog structure, Slack API token,
     // and trigger ID
     const dialog = {
@@ -69,9 +81,10 @@ app.post('/commands', (req, res) => {
     };
 
     // open the dialog by calling dialogs.open method and sending the payload
-    axios.post('https://slack.com/api/dialog.open', qs.stringify(dialog))
+    axios.post(`${apiUrl}/dialog.open`, qs.stringify(dialog))
       .then((result) => {
         debug('dialog.open: %o', result.data);
+        console.log(result.data)
         res.send('');
       }).catch((err) => {
         debug('dialog.open call failed: %o', err);
@@ -79,7 +92,7 @@ app.post('/commands', (req, res) => {
       });
   } else {
     debug('Verification token mismatch');
-    res.sendStatus(500);
+    res.sendStatus(403);
   }
 });
 
@@ -91,7 +104,7 @@ app.post('/interactive-component', (req, res) => {
   const body = JSON.parse(req.body.payload);
 
   // check that the verification token matches expected value
-  if (body.token === process.env.SLACK_VERIFICATION_TOKEN) {
+  if (signature.isVerified(req)) {
     debug(`Form submission received: ${body.submission.trigger_id}`);
 
     // immediately respond with a empty 200 response to let
@@ -102,10 +115,10 @@ app.post('/interactive-component', (req, res) => {
     ticket.create(body.user.id, body.submission);
   } else {
     debug('Token mismatch');
-    res.sendStatus(500);
+    res.sendStatus(403);
   }
 });
 
-app.listen(process.env.PORT, () => {
-  console.log(`App listening on port ${process.env.PORT}!`);
+const server = app.listen(process.env.PORT || 5000, () => {
+  console.log('Express server listening on port %d in %s mode', server.address().port, app.settings.env);
 });
