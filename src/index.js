@@ -37,8 +37,7 @@ app.get('/', (req, res) => {
  * Checks verification token and opens a dialog to capture more info.
  */
 app.post('/commands', (req, res) => {
-  // extract the verification token, slash command text,
-  // and trigger ID from payload
+  // extract the slash command text, and trigger ID from payload
   const { text, trigger_id } = req.body;
 
   // check that the verification token matches expected value
@@ -114,7 +113,7 @@ app.post('/interactive-component', (req, res) => {
     ticket.create(body.user.id, body.submission);
   } else {
     debug('Token mismatch');
-    res.sendStatus(403);
+    res.sendStatus(404);
   }
 });
 
