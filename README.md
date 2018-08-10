@@ -42,6 +42,6 @@ Use a slash command and a dialog to create a helpdesk ticket in a 3rd-party syst
     * Either clone this repo and run `npm install`
     * Or visit https://glitch.com/edit/#!/remix/slack-slash-command-and-dialogs-blueprint
 2. Set the following environment variables to `.env` (see `.env.sample`):
-    * `SLACK_ACCESS_TOKEN`: Your app's `xoxa-` token (available on the Install App page)
+    * `SLACK_ACCESS_TOKEN`: Your app's `xoxa-` token (available on the ****OAuth & Permissions** once you install the app)
     * `SLACK_SIGNING_SECRET`: Your app's Signing Secret (available on the **Basic Information** page)
 3. If you're running the app locally, run the app (`npm start`)

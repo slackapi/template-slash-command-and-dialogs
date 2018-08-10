@@ -7,10 +7,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "DEBUG=slash-command-template node src/index.js"
   },
-  "author": "Sachin Ranchod <sranchod@slack-corp.com>",
-  "contributors": [
-    "Tomomi Imura <timura@slack-corp.com>"
-  ],
+  "authors": ["Sachin Ranchod <sranchod@slack-corp.com>", "Tomomi Imura <timura@slack-corp.com>"],
   "engines": {
     "node": ">=4.2.0",
     "npm": ">=2.14.7"
