@@ -1,7 +1,7 @@
 {
   "name": "slash-command-blueprint",
   "private": true,
-  "version": "1.0.0",
+  "version": "2.0.0",
   "description": "Sample Slack app that responds to an Slack slash command with an interactive message",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",

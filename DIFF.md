@@ -47,3 +47,15 @@ Previously, you needed to verify a *verificatin token* to see if a request was c
 Basically, you need to compare the value of the `X-Slack-Signature`, the HMAC-SHA256 keyed hash of the raw request payload, with a hashed string containing your Slack signin secret code, combined with the version and `X-Slack-Request-Timestamp`. 
 
 Learn more at [Verifying requests from Slack](https://api.slack.com/docs/verifying-requests-from-slack).
+
+
+## Short-lived tokens
+
+Short-lived tokens are also introduced as a security feature, which allows the app owners to proactively rotate tokens when the tokens are compromised.
+
+Your workspace app can use the new `apps.uninstall` method to uninstall itself from a single workspace, revoking all tokens associated with it. To revoke a workspace token without uninstalling the app, use `auth.revoke`.
+
+The short-lived token is *not* included in this Blurprints example since this tutorial is written for internal integration, however, if you are distributing apps, you are required to use short-lived tokens.
+
+:gift: If you are using the [Node SDK](https://github.com/slackapi/node-slack-sdk/issues/617), the token refresh feature is available for you already.
+
