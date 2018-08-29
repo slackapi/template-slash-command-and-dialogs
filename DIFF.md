@@ -49,13 +49,15 @@ Basically, you need to compare the value of the `X-Slack-Signature`, the HMAC-SH
 Learn more at [Verifying requests from Slack](https://api.slack.com/docs/verifying-requests-from-slack).
 
 
-## Short-lived tokens
+## Token rotation
 
-Short-lived tokens are also introduced as a security feature, which allows the app owners to proactively rotate tokens when the tokens are compromised.
+OAuth refresh tokens are also introduced as a security feature, which allows the app owners to proactively rotate tokens when the tokens are compromised.
 
 Your workspace app can use the new `apps.uninstall` method to uninstall itself from a single workspace, revoking all tokens associated with it. To revoke a workspace token without uninstalling the app, use `auth.revoke`.
 
-The short-lived token is *not* included in this Blurprints example since this tutorial is written for internal integration, however, if you are distributing apps, you are required to use short-lived tokens.
+Although the example of using the short-lived refresh token is *not* included in this Blurprints example since this tutorial is written for internal integration, if you are distributing your app, use a short-lived OAuth Refresh token. Implementing token rotation is required for all apps that are distributed, whether submitted for the App Directory or not.
 
-:gift: If you are using the [Node SDK](https://github.com/slackapi/node-slack-sdk/issues/617), the token refresh feature is available for you already.
+To lean more, read [Token rotation for workspace apps](https://api.slack.com/docs/rotating-and-refreshing-credentials).
 
+
+:gift: If you are using the [Node SDK](https://github.com/slackapi/node-slack-sdk/issues/617), the token refresh feature is available for you already!
