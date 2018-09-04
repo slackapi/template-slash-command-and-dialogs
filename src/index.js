@@ -90,7 +90,7 @@ app.post('/commands', (req, res) => {
       });
   } else {
     debug('Verification token mismatch');
-    res.sendStatus(403);
+    res.sendStatus(404);
   }
 });
 
