@@ -36,7 +36,7 @@ app.get('/', (req, res) => {
  * Endpoint to receive /helpdesk slash command from Slack.
  * Checks verification token and opens a dialog to capture more info.
  */
-app.post('/commands', (req, res) => {
+app.post('/command', (req, res) => {
   // extract the slash command text, and trigger ID from payload
   const { text, trigger_id } = req.body;
 
