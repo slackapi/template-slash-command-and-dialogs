@@ -33,6 +33,9 @@ Use a slash command and a dialog to create a helpdesk ticket in a 3rd-party syst
     * Usage hint: `[the problem you're having]`
 1. Save and reinstall the app
 
+If you are using Glitch, the Request URL should look like: `https://slack-slash-command-and-dialogs-blueprint.glitch.me/command`.
+
+
 #### Enable Interactive Components
 1. Go back to the app settings and click on Interactive Components.
 1. Set the Request URL to your server (*e.g.* `https://yourname.ngrok.com`) or Glitch URL + `/interactive-component`
