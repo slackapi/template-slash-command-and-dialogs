@@ -1,4 +1,5 @@
 const crypto = require('crypto');
+const timingSafeCompare = require('tsscmp');
 
 const isVerified = (req) => {
   const signature = req.headers['x-slack-signature'];
@@ -13,7 +14,7 @@ const isVerified = (req) => {
   hmac.update(`${version}:${timestamp}:${req.rawBody}`);
 
   // check that the request signature matches expected value
-  return hmac.digest('hex') === hash;
+  return timingSafeCompare(hmac.digest('hex'), hash);
 }; 
   
 module.exports = { isVerified };
