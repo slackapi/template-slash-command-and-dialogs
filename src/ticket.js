@@ -11,6 +11,7 @@ const sendConfirmation = (ticket) => {
   axios.post('https://slack.com/api/chat.postMessage', qs.stringify({
     token: process.env.SLACK_ACCESS_TOKEN,
     channel: ticket.userId,
+    as_user: true,
     text: 'Helpdesk ticket created!',
     attachments: JSON.stringify([
       {

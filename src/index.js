@@ -98,7 +98,7 @@ app.post('/command', (req, res) => {
  * Endpoint to receive the dialog submission. Checks the verification token
  * and creates a Helpdesk ticket
  */
-app.post('/interactive-component', (req, res) => {
+app.post('/interactive', (req, res) => {
   const body = JSON.parse(req.body.payload);
 
   // check that the verification token matches expected value
