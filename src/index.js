@@ -44,48 +44,100 @@ app.post('/command', (req, res) => {
   if (signature.isVerified(req)) {
     // create the dialog payload - includes the dialog structure, Slack API token,
     // and trigger ID
-    const dialog = {
+    const view = {
       token: process.env.SLACK_ACCESS_TOKEN,
       trigger_id,
-      dialog: JSON.stringify({
-        title: 'Submit a helpdesk ticket',
+      view: JSON.stringify({
+        type: 'modal',
+        title: {
+          type: 'plain_text',
+          text: 'Submit a helpdesk ticket'
+        },
         callback_id: 'submit-ticket',
-        submit_label: 'Submit',
-        elements: [
+        submit: {
+          type: 'plain_text',
+          text: 'Submit'
+        },
+        blocks: [
           {
-            label: 'Title',
-            type: 'text',
-            name: 'title',
-            value: text,
-            hint: '30 second summary of the problem',
+            block_id: 'title_block',
+            type: 'input',
+            label: {
+              type: 'plain_text',
+              text: 'Title'
+            },
+            element: {
+              action_id: 'title',
+              type: 'plain_text_input'
+            },
+            hint: {
+              type: 'plain_text',
+              text: '30 second summary of the problem'
+            }
           },
           {
-            label: 'Description',
-            type: 'textarea',
-            name: 'description',
-            optional: true,
+            block_id: 'description_block',
+            type: 'input',
+            label: {
+              type: 'plain_text',
+              text: 'Description'
+            },
+            element: {
+              action_id: 'description',
+              type: 'plain_text_input',
+              multiline: true
+            },
+            optional: true
           },
           {
-            label: 'Urgency',
-            type: 'select',
-            name: 'urgency',
-            options: [
-              { label: 'Low', value: 'Low' },
-              { label: 'Medium', value: 'Medium' },
-              { label: 'High', value: 'High' },
-            ],
-          },
-        ],
-      }),
+            block_id: 'urgency_block',
+            type: 'input',
+            label: {
+              type: 'plain_text',
+              text: 'Importance'
+            },
+            element: {
+              action_id: 'urgency',
+              type: 'static_select',
+              options: [
+                {
+                  text: {
+                    type: "plain_text",
+                    text: "High"
+                  },
+                  value: "high"
+                },
+                {
+                  text: {
+                    type: "plain_text",
+                    text: "Medium"
+                  },
+                  value: "medium"
+                },
+                {
+                  text: {
+                    type: "plain_text",
+                    text: "Low"
+                  },
+                  value: "low"
+                }
+              ]
+            },
+            optional: true
+          }
+        ]
+      })
     };
 
+    console.log('open view')
+
     // open the dialog by calling dialogs.open method and sending the payload
-    axios.post(`${apiUrl}/dialog.open`, qs.stringify(dialog))
+    axios.post(`${apiUrl}/views.open`, qs.stringify(view))
       .then((result) => {
-        debug('dialog.open: %o', result.data);
+        debug('views.open: %o', result.data);
         res.send('');
       }).catch((err) => {
-        debug('dialog.open call failed: %o', err);
+        debug('views.open call failed: %o', err);
         res.sendStatus(500);
       });
   } else {
@@ -103,14 +155,14 @@ app.post('/interactive', (req, res) => {
 
   // check that the verification token matches expected value
   if (signature.isVerified(req)) {
-    debug(`Form submission received: ${body.submission.trigger_id}`);
+    debug(`Form submission received: ${body.view}`);
 
     // immediately respond with a empty 200 response to let
     // Slack know the command was received
     res.send('');
 
     // create Helpdesk ticket
-    ticket.create(body.user.id, body.submission);
+    ticket.create(body.user.id, body.view);
   } else {
     debug('Token mismatch');
     res.sendStatus(404);

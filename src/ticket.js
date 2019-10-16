@@ -13,33 +13,33 @@ const sendConfirmation = (ticket) => {
     channel: ticket.userId,
     as_user: true,
     text: 'Helpdesk ticket created!',
-    attachments: JSON.stringify([
+    blocks: JSON.stringify([
       {
-        title: `Ticket created for ${ticket.userEmail}`,
-        // Get this from the 3rd party helpdesk system
-        title_link: 'http://example.com',
-        text: ticket.text,
-        fields: [
-          {
-            title: 'Title',
-            value: ticket.title,
-          },
-          {
-            title: 'Description',
-            value: ticket.description || 'None provided',
-          },
-          {
-            title: 'Status',
-            value: 'Open',
-            short: true,
-          },
-          {
-            title: 'Urgency',
-            value: ticket.urgency,
-            short: true,
-          },
-        ],
+        type: 'section',
+        text: {
+          type: 'mrkdwn',
+          text: '*Helpdesk ticket created!*'
+        }
       },
+      {
+        type: 'divider'
+      },
+      {
+        type: 'section',
+        text: {
+          type: 'mrkdwn',
+          text: `*Title*\n${ticket.title}\n\n*Description*\n${ticket.description}`
+        }
+      },
+      {
+        type: 'context',
+        elements: [
+          {
+            type: 'mrkdwn',
+            text: `*Urgency*: ${ticket.urgency}`
+          }
+        ]
+      }
     ]),
   })).then((result) => {
     debug('sendConfirmation: %o', result.data);
@@ -51,7 +51,8 @@ const sendConfirmation = (ticket) => {
 
 // Create helpdesk ticket. Call users.find to get the user's email address
 // from their user ID
-const create = (userId, submission) => {
+const create = (userId, view) => {
+  let values = view.state.values
   const ticket = {};
 
   const fetchUserEmail = new Promise((resolve, reject) => {
@@ -64,9 +65,9 @@ const create = (userId, submission) => {
   fetchUserEmail.then((result) => {
     ticket.userId = userId;
     ticket.userEmail = result;
-    ticket.title = submission.title;
-    ticket.description = submission.description;
-    ticket.urgency = submission.urgency;
+    ticket.title = values.title_block.title.value;
+    ticket.description = values.description_block.description.value;
+    ticket.urgency = values.urgency_block.urgency.selected_option.text.text;
     sendConfirmation(ticket);
 
     return ticket;
