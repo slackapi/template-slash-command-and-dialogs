@@ -9,8 +9,8 @@
     "dev": "nodemon src/index.js"
   },
   "authors": [
-    "Sachin Ranchod <sranchod@slack-corp.com>",
-    "Tomomi Imura <timura@slack-corp.com>",
+    "Sachin Ranchod <opensource@slack.com>",
+    "Tomomi Imura <opensource@slack.com>",
     "David Pichsenmeister  <opensource@slack.com>"
   ],
   "engines": {
