@@ -10,7 +10,8 @@
   },
   "authors": [
     "Sachin Ranchod <sranchod@slack-corp.com>",
-    "Tomomi Imura <timura@slack-corp.com>"
+    "Tomomi Imura <timura@slack-corp.com>",
+    "David Pichsenmeister  <opensource@slack.com>"
   ],
   "engines": {
     "node": ">=4.2.0",
