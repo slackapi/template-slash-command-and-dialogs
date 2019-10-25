@@ -1,8 +1,8 @@
-# Slash Command and Dialogs blueprint
+# Slash Command and ~~Dialogs~~ Modals blueprint
 
-> :sparkles: *Updated October 2018: As we have introduced some new features, this tutorial and the code samples have been updated! All the changes from the previous version of this example, read the DIFF.md*
+> :sparkles: *Updated October 2019: As we have introduced some new features, this tutorial and the code samples have been updated! All the changes from the previous version of this example, read the [DIFF.md](DIFF.md)*
 
-## Creating a helpdesk ticket using a Slash Command and a Dialog
+## Creating a helpdesk ticket using a Slash Command and a ~~Dialog~~ Modal
 
 Use a slash command and a dialog to create a helpdesk ticket in a 3rd-party system. Once it has been created, send a message to the user with information about their ticket.
 
