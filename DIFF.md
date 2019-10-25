@@ -2,12 +2,27 @@
 
 Now all the Blueprints examples have been updated with new Slack platform features. So what are the *diffs* in this updated example?
 
-## OAuth Token
+---
+## Changes made in October 2019
+
+### Modals
+
+*Major updates!: This requires to update your code!*
+
+We released [Modals](https://api.slack.com/block-kit/surfaces/modals), which is replacing the existing Dialogs, with more powerful features.
+
+Now, instead of calling an API to open a dialog is replaced with the new view API to open a modal with Block Kit in the code sample.
+
+
+---
+## Changes made in October 2018
+
+### OAuth Token
 
 Your OAuth access token should begins with `-xoxb` instead of `-xoxp`. The bot tokens will be the defaul token in future.
 
 
-## Sigining Secret 
+### Sigining Secret 
 
 *This requires to update your code!*
 
@@ -18,7 +33,7 @@ Basically, you need to compare the value of the `X-Slack-Signature`, the HMAC-SH
 Learn more at [Verifying requests from Slack](https://api.slack.com/docs/verifying-requests-from-slack).
 
 
-## Token rotation
+### Token rotation
 
 OAuth refresh tokens are also introduced as a security feature, which allows the app owners to proactively rotate tokens when the tokens are compromised.
 
