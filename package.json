@@ -13,7 +13,7 @@
     "npm": ">=2.14.7"
   },
   "dependencies": {
-    "axios": "^0.16.0",
+    "axios": "^0.18.1",
     "body-parser": "^1.17.1",
     "debug": "^3.1.0",
     "dotenv": "^4.0.0",
