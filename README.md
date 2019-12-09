@@ -55,3 +55,7 @@ If you did "Remix" on Glitch, it auto-generate a new URL with two random words, 
 3. If you're running the app locally, run the app (`npm start`).
 
 If you want to run it locally, I recommend creating a localhost tunnel with [ngrok](https://ngrok.com)!
+
+
+### App Flow Diagram
+![diagram](https://api.slack.com/dev-cdn/v1568133600/img/api/articles/blueprints/slash_command_and_dialogs.png)
