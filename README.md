@@ -18,7 +18,10 @@ Use a slash command and a dialog to create a helpdesk ticket in a 3rd-party syst
 4. Enable Interactive components (See *Enable Interactive Components* below)
 5. Navigate to the **OAuth & Permissions** page and make sure the following bot token scopes are pre-selected:
     * `commands`
-    * `bot`
+    * `chat:write`
+    * `users:read`
+    * `users:read.email`
+    * `im:write`
 6. Click 'Save Changes' and install the app (You should get an OAuth access token after the installation)
 
 #### Add a Slash Command
