@@ -14,15 +14,14 @@ Use a slash command and a dialog to create a helpdesk ticket in a 3rd-party syst
 
 1. Create an app at [https://api.slack.com/apps](https://api.slack.com/apps)
 2. Add a Slash command (See *Add a Slash Command* section below)
-3. Navigate to **Bot Users** and click "Add a Bot User" to create one.
-4. Enable Interactive components (See *Enable Interactive Components* below)
-5. Navigate to the **OAuth & Permissions** page and make sure the following bot token scopes are pre-selected:
+3. Enable Interactive components (See *Enable Interactive Components* below)
+4. Navigate to the **OAuth & Permissions** page and select the following bot token scopes:
     * `commands`
     * `chat:write`
     * `users:read`
     * `users:read.email`
     * `im:write`
-6. Click 'Save Changes' and install the app (You should get an OAuth access token after the installation)
+5. Click 'Save Changes' and install the app (You should get an OAuth access token after the installation)
 
 #### Add a Slash Command
 1. Go back to the app settings and click on Slash Commands.
