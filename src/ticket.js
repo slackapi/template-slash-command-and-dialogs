@@ -8,8 +8,8 @@ const payloads = require('./payloads');
  */
 const sendConfirmation = async (ticket) => {
   // open a DM channel for that user
-  let channel = await api.callAPIMethod('im.open', {
-    user: ticket.userId
+  let channel = await api.callAPIMethod('conversations.open', {
+    users: ticket.userId
   })
 
   let message = payloads.confirmation({
