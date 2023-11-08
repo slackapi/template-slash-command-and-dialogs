@@ -34,7 +34,7 @@ app.get('/', (req, res) => {
  * Endpoint to receive /helpdesk slash command from Slack.
  * Checks verification token and opens a dialog to capture more info.
  */
-app.post('/command', async (req, res) => {
+app.post('/project', async (req, res) => {
   // Verify the signing secret
   if (!signature.isVerified(req)) {
     debug('Verification token mismatch');
