@@ -31,7 +31,7 @@ const create = async (userId, view) => {
 
   // DEBUG
   console.log('VALUES OUTPUT');
-  console.log(values);
+  console.log(JSON.stringify(values));
 
   let result = await api.callAPIMethod('users.info', {
     user: userId
