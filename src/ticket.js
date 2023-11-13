@@ -1,32 +1,37 @@
 const debug = require('debug')('slash-command-template:ticket');
 const api = require('./api');
 const payloads = require('./payloads');
+const config = require('./dbConfig');
 
 /*
- *  Send ticket creation confirmation via
+ *  Send project creation confirmation via
  *  chat.postMessage to the user who created it
  */
 const sendConfirmation = async (ticket) => {
   // open a DM channel for that user
-  let channel = await api.callAPIMethod('im.open', {
-    user: ticket.userId
+  let channel = await api.callAPIMethod('conversations.open', {
+    users: ticket.userId
   })
 
   let message = payloads.confirmation({
     channel_id: channel.channel.id,
-    title: ticket.title,
-    description: ticket.description,
-    urgency: ticket.urgency
+    bu: ticket.bu,
+    name: ticket.name,
+    type: ticket.type
   });
 
   let result = await api.callAPIMethod('chat.postMessage', message)
   debug('sendConfirmation: %o', result);
 };
 
-// Create helpdesk ticket. Call users.find to get the user's email address
+// Create project. Call users.find to get the user's email address
 // from their user ID
 const create = async (userId, view) => {
   let values = view.state.values;
+
+  // DEBUG
+  console.log('VALUES OUTPUT');
+  console.log(values);
 
   let result = await api.callAPIMethod('users.info', {
     user: userId
@@ -35,9 +40,9 @@ const create = async (userId, view) => {
   await sendConfirmation({
     userId,
     userEmail: result.user.profile.email,
-    title: values.title_block.title.value,
-    description: values.description_block.description.value || '_empty_',
-    urgency: values.urgency_block.urgency.selected_option && values.urgency_block.urgency.selected_option.text.text || 'not assigned'
+    bu: values.bu_block.bu.selected_option && values.bu_block.bu.selected_option.text.text || 'not assigned',
+    name: values.name_block.name.value || '_empty_',
+    type: values.type_block.type.selected_option && values.type_block.type.selected_option.text.text || 'not assigned'
   });
 };
 

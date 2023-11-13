@@ -2,13 +2,13 @@ module.exports = {
     confirmation: context => {
         return {
             channel: context.channel_id,
-            text: 'Helpdesk ticket created!',
+            text: 'Project created!',
             blocks: JSON.stringify([
                 {
                     type: 'section',
                     text: {
                         type: 'mrkdwn',
-                        text: '*Helpdesk ticket created!*'
+                        text: '*Project created!*'
                     }
                 },
                 {
@@ -18,7 +18,7 @@ module.exports = {
                     type: 'section',
                     text: {
                         type: 'mrkdwn',
-                        text: `*Title*\n${context.title}\n\n*Description*\n${context.description}`
+                        text: `*Title*\n${context.name}\n`
                     }
                 },
                 {
@@ -26,7 +26,7 @@ module.exports = {
                     elements: [
                         {
                             type: 'mrkdwn',
-                            text: `*Urgency*: ${context.urgency}`
+                            text: `*Business Unit*: ${context.bu}`
                         }
                     ]
                 }
@@ -40,7 +40,7 @@ module.exports = {
                 type: 'modal',
                 title: {
                     type: 'plain_text',
-                    text: 'Submit a helpdesk ticket'
+                    text: 'Propose Project'
                 },
                 callback_id: 'submit-ticket',
                 submit: {
@@ -49,70 +49,259 @@ module.exports = {
                 },
                 blocks: [
                     {
-                        block_id: 'title_block',
+                        block_id: 'bu_block',
                         type: 'input',
                         label: {
                             type: 'plain_text',
-                            text: 'Title'
+                            text: 'Business Unit'
                         },
                         element: {
-                            action_id: 'title',
-                            type: 'plain_text_input'
-                        },
-                        hint: {
-                            type: 'plain_text',
-                            text: '30 second summary of the problem'
-                        }
-                    },
-                    {
-                        block_id: 'description_block',
-                        type: 'input',
-                        label: {
-                            type: 'plain_text',
-                            text: 'Description'
-                        },
-                        element: {
-                            action_id: 'description',
-                            type: 'plain_text_input',
-                            multiline: true
-                        },
-                        optional: true
-                    },
-                    {
-                        block_id: 'urgency_block',
-                        type: 'input',
-                        label: {
-                            type: 'plain_text',
-                            text: 'Importance'
-                        },
-                        element: {
-                            action_id: 'urgency',
+                            action_id: 'bu',
                             type: 'static_select',
                             options: [
                                 {
                                     text: {
                                         type: "plain_text",
-                                        text: "High"
+                                        text: "AMER"
                                     },
-                                    value: "high"
+                                    value: "amer"
                                 },
                                 {
                                     text: {
                                         type: "plain_text",
-                                        text: "Medium"
+                                        text: "EMEA"
                                     },
-                                    value: "medium"
+                                    value: "emea"
                                 },
                                 {
                                     text: {
                                         type: "plain_text",
-                                        text: "Low"
+                                        text: "APAC"
                                     },
-                                    value: "low"
+                                    value: "apac"
                                 }
                             ]
                         },
-                        optional: true
+                        optional: false
+                    },
+                    {
+                        block_id: 'name_block',
+                        type: 'input',
+                        label: {
+                            type: 'plain_text',
+                            text: 'Project Name'
+                        },
+                        element: {
+                            action_id: 'name',
+                            type: 'plain_text_input'
+                        },
+                        optional: false
+                    },
+                    {
+                        block_id: 'type_block',
+                        type: 'input',
+                        label: {
+                            type: 'plain_text',
+                            text: 'Type'
+                        },
+                        element: {
+                            action_id: 'type',
+                            type: 'static_select',
+                            options: [
+                                {
+                                    text: {
+                                        type: "plain_text",
+                                        text: "Campaign"
+                                    },
+                                    value: "campaign"
+                                },
+                                {
+                                    text: {
+                                        type: "plain_text",
+                                        text: "Commerce"
+                                    },
+                                    value: "commerce"
+                                },
+                                {
+                                    text: {
+                                        type: "plain_text",
+                                        text: "Automation"
+                                    },
+                                    value: "automation"
+                                }
+                            ]
+                        }
+                    },
+                    {
+                        block_id: 'brief_block',
+                        type: 'input',
+                        label: {
+                            type: 'plain_text',
+                            text: 'Brief'
+                        },
+                        element: {
+                            action_id: 'brief',
+                            type: 'plain_text_input'
+                        },
+                        optional: false
+                    },
+                    {
+                        block_id: 'need_block',
+                        type: 'input',
+                        label: {
+                            type: 'plain_text',
+                            text: 'Need'
+                        },
+                        element: {
+                            action_id: 'need',
+                            type: 'multi_static_select',
+                            placeholder: {
+                                type: 'plain_text',
+                                text: 'Select needs'
+                            },
+                            options: [
+                                {
+                                    text: {
+                                        type: "plain_text",
+                                        text: "Copy"
+                                    },
+                                    value: "copy"
+                                },
+                                {
+                                    text: {
+                                        type: "plain_text",
+                                        text: "Creative"
+                                    },
+                                    value: "creative"
+                                },
+                                {
+                                    text: {
+                                        type: "plain_text",
+                                        text: "Journey"
+                                    },
+                                    value: "journey"
+                                }
+                            ]
+                        },
+                        optional: false
+                    },
+                    {
+                        block_id: 'comm_block',
+                        type: 'input',
+                        label: {
+                            type: 'plain_text',
+                            text: 'Communications'
+                        },
+                        element: {
+                            action_id: 'communications',
+                            type: 'number_input',
+                            is_decimal_allowed: false
+                        }
+                    },
+                    {
+                        block_id: 'languages_block',
+                        type: 'input',
+                        label: {
+                            type: 'plain_text',
+                            text: 'Languages'
+                        },
+                        element: {
+                            action_id: 'languages',
+                            type: 'multi_static_select',
+                            options: [
+                                {
+                                    text: {
+                                        type: "plain_text",
+                                        text: "English"
+                                    },
+                                    value: "english"
+                                },
+                                {
+                                    text: {
+                                        type: "plain_text",
+                                        text: "Spanish"
+                                    },
+                                    value: "spanish"
+                                },
+                                {
+                                    text: {
+                                        type: "plain_text",
+                                        text: "French"
+                                    },
+                                    value: "french"
+                                }
+                            ]
+                        }
+                    },
+                    {
+                        block_id: 'objective_block',
+                        type: 'input',
+                        label: {
+                            type: 'plain_text',
+                            text: 'Objective'
+                        },
+                        element: {
+                            action_id: 'objective',
+                            type: 'multi_static_select',
+                            options: [
+                                {
+                                    text: {
+                                        type: "plain_text",
+                                        text: "New Members"
+                                    },
+                                    value: "new_members"
+                                },
+                                {
+                                    text: {
+                                        type: "plain_text",
+                                        text: "Cart Conversion"
+                                    },
+                                    value: "cart_conv"
+                                }
+                            ]
+                        }
+                    },
+                    {
+                        block_id: 'goal_block',
+                        type: 'input',
+                        label: {
+                            type: 'plain_text',
+                            text: 'Goal'
+                        },
+                        element: {
+                            action_id: 'goal',
+                            type: 'number_input',
+                            is_decimal_allowed: true
+                        }
+                    },
+                    {
+                        block_id: 'budget_block',
+                        type: 'input',
+                        label: {
+                            type: 'plain_text',
+                            text: 'Budget'
+                        },
+                        element: {
+                            action_id: 'budget',
+                            type: 'number_input',
+                            is_decimal_allowed: true
+                        }
+                    },
+                    {
+                        block_id: 'date_block',
+                        type: 'input',
+                        label: {
+                            type: 'plain_text',
+                            text: 'Due Date'
+                        },
+                        element: {
+                            action_id: 'date',
+                            type: 'datepicker',
+                            placeholder: {
+                                type: 'plain_text',
+                                text: 'Select a date'
+                            }
+                        }
                     }
                 ]
             })

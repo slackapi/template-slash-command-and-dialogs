@@ -58,7 +58,7 @@ app.post('/project', async (req, res) => {
 
 /*
  * Endpoint to receive the dialog submission. Checks the verification token
- * and creates a Helpdesk ticket
+ * and creates a project
  */
 app.post('/interactive', (req, res) => {
   // Verify the signing secret
@@ -69,9 +69,10 @@ app.post('/interactive', (req, res) => {
 
   const body = JSON.parse(req.body.payload);
   res.send('');
+  
   ticket.create(body.user.id, body.view);
 });
 
-const server = app.listen(process.env.PORT || 5000, () => {
+const server = app.listen(process.env.PORT || 3000, () => {
   console.log('Express server listening on port %d in %s mode', server.address().port, app.settings.env);
 });
