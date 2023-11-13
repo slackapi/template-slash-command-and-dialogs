@@ -31,7 +31,9 @@ const create = async (userId, view) => {
 
   // DEBUG
   console.log('VALUES OUTPUT');
+  console.log('---- start commiting to heroku pg ----');
   console.log(JSON.stringify(values));
+  console.log('---- end commiting to heroku pg ----');
 
   let result = await api.callAPIMethod('users.info', {
     user: userId
